@@ -49,10 +49,13 @@ def draw_array(tdlist):
 	win.getMouse()
 	win.close()
 
+	
+# Test
+# Make list
 two_d_list = make_list(150,160)
-
+# Add some water
 add_structure(two_d_list, 10, 10, 1, 50, 25)
-
+# Draw the map
 draw_array(two_d_list)
 
 
