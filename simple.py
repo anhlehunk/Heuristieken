@@ -1,8 +1,15 @@
 from graphics import *
+from random import randint
 
-WIDTH=160
-HEIGHT=150
+WIDTH=320
+HEIGHT=300
 STRUCTURELIST=[]
+
+# Values for different type of structures
+WATER=1
+HOUSE_SMALL=2
+HOUSE_MEDIUM=3
+HOUSE_LARGE=4
 
 def print_list(list):
 	# Prints every sublist on a new ine
@@ -22,11 +29,33 @@ def add_structure(tdlist, start_x, start_y, value, heigth, width):
 	# Height: height of structure to add (int)
 	# Width: width of structure to add (int)
 	# TODO check to see if out of range
-	STRUCTURELIST.append(((start_x,start_y), (start_x+width, start_y+heigth), (value)))
 	for x in range(start_x, start_x + width):
 		for y in range(start_y, start_y + heigth):
-			tdlist[y][x] = value
+			if tdlist[y][x] != 0:
+				# Only prints warning, still adds structure to map
+				print "Overlap"
+			else:
+				tdlist[y][x] = value
+	# Should only append if no overlap, but now appends everything
+	STRUCTURELIST.append(((start_x,start_y), (start_x+width, start_y+heigth), (value)))
 	return tdlist	
+
+def add_water(amount, tdlist):
+	for i in range(amount):
+		# hier moeten de correcte afmetingen komen, zijn nu nog random
+		add_structure(tdlist, randint(0,290), randint(0,270), WATER, randint(10,30), randint(10,30))
+
+def add_small_house(amount, tdlist):
+	for i in range(amount):
+		add_structure(tdlist, randint(0,290), randint(0,270), HOUSE_SMALL, 16, 16) # uit mn hoofd was het 8 bij 8 meter dus 16x16
+
+def add_medium_house(amount, tdlist):
+	for i in range(amount):
+		add_structure(tdlist, randint(0,290), randint(0,270), HOUSE_MEDIUM, 20, 20) # 20 want ik wist de afmetingen niet uit mn hoofd
+
+def add_big_house(amount, tdlist):
+	for i in range(amount):
+		add_structure(tdlist, randint(0,290), randint(0,270), HOUSE_LARGE, 25,25) # 25 want wist afmetingen niet
 
 def old_draw_array(tdlist):
 	# Uses graphics lib to draw the 2d list
@@ -68,11 +97,15 @@ def new_draw_array(tdlist):
 		elif value == 2:
 			structure.setFill('black')
 			structure.setOutline('black')
-		# etc for other structures
+		elif value == 3:
+			structure.setFill('red')
+			structure.setOutline('red')
+		elif value == 4:
+			structure.setFill('purple')
+			structure.setOutline('purple')
 		else:
 			print "Structure value not defined"
 		structure.draw(win)
-
 
 	# Make window
 	win.getMouse()
@@ -81,14 +114,14 @@ def new_draw_array(tdlist):
 # Make list from HEIGHT and WIDTH
 two_d_list = make_list()
 
-# Adds structure with top left coordinates (10,10), heigth 50, width 25 and value 1
-add_structure(two_d_list, 10, 10, 1, 50, 25)
+# Adds structues on random places
+add_water(randint(1,4), two_d_list)
+add_small_house(12, two_d_list)
+add_medium_house(6, two_d_list)
+add_big_house(2, two_d_list)
 
 # Draws the list
 new_draw_array(two_d_list)
-
-
-
 
 # Sources
 # https://www.dotnetperls.com/2d-python
