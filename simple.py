@@ -69,7 +69,8 @@ def new_draw_array(tdlist):
 			structure.setFill('black')
 			structure.setOutline('black')
 		# etc for other structures
-		else print "Structure value not defined"
+		else:
+			print "Structure value not defined"
 		structure.draw(win)
 
 
