@@ -1,22 +1,18 @@
 from graphics import *
 
+WIDTH=160
+HEIGHT=150
+STRUCTURELIST=[]
+
 def print_list(list):
 	# Prints every sublist on a new ine
 	for i in list:
 		print i
 
-def make_list(height, width):
+def make_list():
 	# Makes empty 2d list with dimensions height x width
-	newlist = [[0 for i in range(width)]for j in range(height)]
+	newlist = [[0 for i in range(WIDTH)]for j in range(HEIGHT)]
 	return newlist
-
-def get_height(tdlist):
-	# Returns height of list, obsolete if height is global variable
-	return len(tdlist)
-
-def get_width(tdlist):
-	# Returns width of list, obsolete if width is global variable
-	return len(tdlist[0])
 
 def add_structure(tdlist, start_x, start_y, value, heigth, width):
 	# Adds an item to 2d list
@@ -26,6 +22,7 @@ def add_structure(tdlist, start_x, start_y, value, heigth, width):
 	# Height: height of structure to add (int)
 	# Width: width of structure to add (int)
 	# TODO check to see if out of range
+	STRUCTURELIST.append(((start_x,start_y), (start_x+width, start_y+heigth), (value)))
 	for x in range(start_x, start_x + width):
 		for y in range(start_y, start_y + heigth):
 			tdlist[y][x] = value
@@ -33,7 +30,7 @@ def add_structure(tdlist, start_x, start_y, value, heigth, width):
 
 def draw_array(tdlist):
 	# Uses graphics lib to draw the 2d list
-	win = GraphWin("Map",get_width(tdlist),get_height(tdlist))
+	win = GraphWin("Map",WIDTH,HEIGHT)
 	for y in enumerate(tdlist):
 		for x in enumerate(y[1]):
 			if x[1] == 0:
@@ -49,14 +46,48 @@ def draw_array(tdlist):
 	win.getMouse()
 	win.close()
 
-	
-# Test
-# Make list
-two_d_list = make_list(150,160)
-# Add some water
+def new_draw_array(tdlist):
+	win = GraphWin("Map",WIDTH, HEIGHT)
+
+	# Draw green background
+	grass = Rectangle(Point(0,0), Point(WIDTH,HEIGHT))
+	grass.setFill('green')
+	grass.setOutline('green')
+	grass.draw(win)
+
+	# Get coordinates and values from STRUCTURELIST
+	for tuple in STRUCTURELIST:
+		# tuple: ((x1,y1), (x2,y2), (value))
+		topleft = tuple[0]
+		bottomright = tuple[1]
+		value = tuple[2]
+		structure = Rectangle(Point(topleft[0],topleft[1]), Point(bottomright[0], bottomright[1]))
+		if value == 1:
+			structure.setFill('blue')
+			structure.setOutline('blue')
+		elif value == 2:
+			structure.setFill('black')
+			structure.setOutline('black')
+		# etc for other structures
+		else print "Structure value not defined"
+		structure.draw(win)
+
+
+	# Make window
+	win.getMouse()
+	win.close()
+
+
+two_d_list = make_list()
+
 add_structure(two_d_list, 10, 10, 1, 50, 25)
-# Draw the map
-draw_array(two_d_list)
+
+#draw_array(two_d_list)
+#print_list(two_d_list)
+
+new_draw_array(two_d_list)
+
+
 
 
 # Sources
