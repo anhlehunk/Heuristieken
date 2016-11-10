@@ -28,7 +28,7 @@ def add_structure(tdlist, start_x, start_y, value, heigth, width):
 			tdlist[y][x] = value
 	return tdlist	
 
-def draw_array(tdlist):
+def old_draw_array(tdlist):
 	# Uses graphics lib to draw the 2d list
 	win = GraphWin("Map",WIDTH,HEIGHT)
 	for y in enumerate(tdlist):
@@ -77,14 +77,13 @@ def new_draw_array(tdlist):
 	win.getMouse()
 	win.close()
 
-
+# Make list from HEIGHT and WIDTH
 two_d_list = make_list()
 
+# Adds structure with top left coordinates (10,10), heigth 50, width 25 and value 1
 add_structure(two_d_list, 10, 10, 1, 50, 25)
 
-#draw_array(two_d_list)
-#print_list(two_d_list)
-
+# Draws the list
 new_draw_array(two_d_list)
 
 
