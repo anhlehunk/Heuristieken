@@ -21,7 +21,7 @@ def make_list():
 	newlist = [[0 for i in range(WIDTH)]for j in range(HEIGHT)]
 	return newlist
 
-def add_structure(tdlist, start_x, start_y, value, heigth, width):
+def add_structure(tdlist, start_x, start_y, value, heigth, width, amount):
 	# Adds an item to 2d list
 	# Start_x: top left x coordinate (int)
 	# Start_y: top left y coordinate (int)
@@ -29,34 +29,40 @@ def add_structure(tdlist, start_x, start_y, value, heigth, width):
 	# Height: height of structure to add (int)
 	# Width: width of structure to add (int)
 	# TODO check to see if out of range
+	tdlistcopy = tdlist
 	for x in range(start_x, start_x + width):
 		for y in range(start_y, start_y + heigth):
 			if tdlist[y][x] != 0:
 				# Only prints warning, still adds structure to map
-				print "Overlap"
+				print "overlap"
+				return tdlistcopy, amount+1
 			else:
 				tdlist[y][x] = value
 	# Should only append if no overlap, but now appends everything
 	STRUCTURELIST.append(((start_x,start_y), (start_x+width, start_y+heigth), (value)))
-	return tdlist	
+	return tdlist, amount	
 
 def add_water(amount, tdlist):
-	for i in range(amount):
+	while amount !=0:
 		# hier moeten de correcte afmetingen komen, zijn nu nog random
-		add_structure(tdlist, randint(0,290), randint(0,270), WATER, randint(10,30), randint(10,30))
+		tdlist, amount = add_structure(tdlist, randint(0,290), randint(0,270), WATER, randint(10,30), randint(10,30), amount)
+		amount -=1
 
 def add_small_house(amount, tdlist):
-	for i in range(amount):
-		add_structure(tdlist, randint(0,290), randint(0,270), HOUSE_SMALL, 16, 16) # uit mn hoofd was het 8 bij 8 meter dus 16x16
+	while amount !=0:
+		tdlist, amount = add_structure(tdlist, randint(0,290), randint(0,270), HOUSE_SMALL, 16, 16, amount) # uit mn hoofd was het 8 bij 8 meter dus 16x16
+		amount -=1
 
 def add_medium_house(amount, tdlist):
-	for i in range(amount):
-		add_structure(tdlist, randint(0,290), randint(0,270), HOUSE_MEDIUM, 20, 20) # 20 want ik wist de afmetingen niet uit mn hoofd
+	while amount !=0:
+		tdlist, amount = add_structure(tdlist, randint(0,290), randint(0,270), HOUSE_MEDIUM, 20, 20, amount) # 20 want ik wist de afmetingen niet uit mn hoofd
+		amount -=1
 
 def add_big_house(amount, tdlist):
-	for i in range(amount):
-		add_structure(tdlist, randint(0,290), randint(0,270), HOUSE_LARGE, 25,25) # 25 want wist afmetingen niet
-
+	while amount !=0:
+		tdlist, amount = add_structure(tdlist, randint(0,290), randint(0,270), HOUSE_LARGE, 25,25, amount) # 25 want wist afmetingen niet
+		amount -=1
+			
 def old_draw_array(tdlist):
 	# Uses graphics lib to draw the 2d list
 	win = GraphWin("Map",WIDTH,HEIGHT)
@@ -118,7 +124,7 @@ two_d_list = make_list()
 add_water(randint(1,4), two_d_list)
 add_small_house(12, two_d_list)
 add_medium_house(6, two_d_list)
-add_big_house(2, two_d_list)
+add_big_house(5, two_d_list)
 
 # Draws the list
 new_draw_array(two_d_list)
