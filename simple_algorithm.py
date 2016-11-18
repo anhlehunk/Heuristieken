@@ -7,33 +7,39 @@ class small_house:
 	width = 8*2
 	height = 8*2
 	free = 2*2
+	value = 285000
 
-	def __init__(self, width, height, free):
+	def __init__(self, width, height, free, value):
 		self.width = width
 		self.height = height
 		self.free = free
+		self.value = value
 
 class medium_house:
 
 	width = 10*2
 	height = int(7.5*2) # Convert float to int
 	free = 3*2
+	value = 399000
 
-	def __init__(self, width, height, free):
+	def __init__(self, width, height, free, value):
 		self.width = width
 		self.height = height
 		self.free = free
+		self.value = value
 
 class big_house:
 
 	width = 11*2
 	height = int(10.5*2) # Convert float to int
 	free = 6*2
+	value = 610000
 
-	def __init__(self, width, height, free):
+	def __init__(self, width, height, free, value):
 		self.width = width
 		self.height = height
 		self.free = free
+		self.value = value
      
 # Define map size and structures
 WIDTH=320
