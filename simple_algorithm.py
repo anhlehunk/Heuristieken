@@ -90,17 +90,17 @@ def add_water(amount, tdlist):
 
 def add_small_house(amount, tdlist):
 	while amount !=0:
-		tdlist, amount = add_structure(tdlist, randint(0,290), randint(0,270), HOUSE_SMALL, small_house.height, small_house.width, amount)
+		tdlist, amount = add_structure(tdlist, randint(small_house.free,WIDTH-small_house.free-small_house.width), randint(small_house.free,HEIGHT-small_house.free-small_house.height), HOUSE_SMALL, small_house.height, small_house.width, amount)
 		amount -=1
 
 def add_medium_house(amount, tdlist):
 	while amount !=0:
-		tdlist, amount = add_structure(tdlist, randint(0,290), randint(0,270), HOUSE_MEDIUM, medium_house.height, medium_house.width, amount)
+		tdlist, amount = add_structure(tdlist, randint(medium_house.free,WIDTH-medium_house.free-medium_house.width), randint(medium_house.free,HEIGHT-medium_house.free-medium_house.height), HOUSE_MEDIUM, medium_house.height, medium_house.width, amount)
 		amount -=1
 
 def add_big_house(amount, tdlist):
 	while amount !=0:
-		tdlist, amount = add_structure(tdlist, randint(0,290), randint(0,270), HOUSE_LARGE, big_house.height, big_house.width, amount)
+		tdlist, amount = add_structure(tdlist, randint(big_house.free,WIDTH-big_house.free-big_house.width), randint(big_house.free,HEIGHT-big_house.free-big_house.height), HOUSE_LARGE, big_house.height, big_house.width, amount)
 		amount -=1
 			
 def old_draw_array(tdlist):
