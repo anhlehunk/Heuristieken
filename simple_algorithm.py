@@ -1,6 +1,41 @@
 from graphics import *
 from random import randint
 
+# Classes
+class small_house:
+
+	width = 8*2
+	height = 8*2
+	free = 2*2
+
+	def __init__(self, width, height, free):
+		self.width = width
+		self.height = height
+		self.free = free
+
+class medium_house:
+
+	width = 10*2
+	height = int(7.5*2) # Convert float to int
+	free = 3*2
+
+	def __init__(self, width, height, free):
+		self.width = width
+		self.height = height
+		self.free = free
+
+class big_house:
+
+	width = 11*2
+	height = int(10.5*2) # Convert float to int
+	free = 6*2
+
+	def __init__(self, width, height, free):
+		self.width = width
+		self.height = height
+		self.free = free
+     
+# Define map size and structures
 WIDTH=320
 HEIGHT=300
 STRUCTURELIST=[]
@@ -50,17 +85,17 @@ def add_water(amount, tdlist):
 
 def add_small_house(amount, tdlist):
 	while amount !=0:
-		tdlist, amount = add_structure(tdlist, randint(0,290), randint(0,270), HOUSE_SMALL, 16, 16, amount) # uit mn hoofd was het 8 bij 8 meter dus 16x16
+		tdlist, amount = add_structure(tdlist, randint(0,290), randint(0,270), HOUSE_SMALL, small_house.height, small_house.width, amount)
 		amount -=1
 
 def add_medium_house(amount, tdlist):
 	while amount !=0:
-		tdlist, amount = add_structure(tdlist, randint(0,290), randint(0,270), HOUSE_MEDIUM, 20, 20, amount) # 20 want ik wist de afmetingen niet uit mn hoofd
+		tdlist, amount = add_structure(tdlist, randint(0,290), randint(0,270), HOUSE_MEDIUM, medium_house.height, medium_house.width, amount)
 		amount -=1
 
 def add_big_house(amount, tdlist):
 	while amount !=0:
-		tdlist, amount = add_structure(tdlist, randint(0,290), randint(0,270), HOUSE_LARGE, 25,25, amount) # 25 want wist afmetingen niet
+		tdlist, amount = add_structure(tdlist, randint(0,290), randint(0,270), HOUSE_LARGE, big_house.height, big_house.width, amount)
 		amount -=1
 			
 def old_draw_array(tdlist):
@@ -128,9 +163,3 @@ add_big_house(5, two_d_list)
 
 # Draws the list
 new_draw_array(two_d_list)
-
-# Sources
-# https://www.dotnetperls.com/2d-python
-# http://anh.cs.luc.edu/python/hands-on/3.1/handsonHtml/graphics.html
-# http://stackoverflow.com/questions/902761/saving-a-numpy-array-as-an-image
-# http://stackoverflow.com/questions/5775352/python-return-2-ints-for-index-in-2d-lists-given-item
