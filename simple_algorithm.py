@@ -75,7 +75,7 @@ def add_structure(tdlist, start_x, start_y, value, heigth, width, amount):
 		for y in range(start_y, start_y + heigth):
 			if tdlist[y][x] != 0:
 				# Only prints warning, still adds structure to map
-				print "overlap"
+				print "overlap found, placing again."
 				return tdlistcopy, amount+1
 			else:
 				tdlist[y][x] = value
@@ -85,7 +85,6 @@ def add_structure(tdlist, start_x, start_y, value, heigth, width, amount):
 
 def add_water(amount, tdlist):
 	while amount !=0:
-		# hier moeten de correcte afmetingen komen, zijn nu nog random
 		tdlist, amount = add_structure(tdlist, randint(0,290), randint(0,270), WATER, randint(10,30), randint(10,30), amount)
 		amount -=1
 
