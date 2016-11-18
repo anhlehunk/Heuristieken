@@ -14,10 +14,10 @@ Visualisatie werkend met grid
 
 Kunnen nu alle soorten huizen en water toevoegen (met vrijstand is nog geen rekening gehouden)
 
-To Do volgende week: Agenda bijhouden, classes toevoegen aan algoritme, denken over soort Algortime
+To Do volgende week: Agenda bijhouden, classes toevoegen aan algoritme, denken over soort Algoritme
 
 ## W3
-State space bepaalt
+State space bepalen
 
 Classes toevoegen aan algoritme
 
