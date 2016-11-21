@@ -1,46 +1,67 @@
 from graphics import *
 from random import randint
+import weakref
 
 # Classes
 class small_house:
 
 	width = 8*2
 	height = 8*2
-	free = 2*2
-	value = 285000
+	min_free = 2*2
+	worth = 285000
+	value = 2
 
-	def __init__(self, width, height, free, value):
-		self.width = width
-		self.height = height
-		self.free = free
-		self.value = value
+	instances = []
+
+	def __init__(self, x, y, name=None):
+		self.__class__.instances.append(weakref.proxy(self))
+		self.x = x
+		self.y = y
+		self.name = name
 
 class medium_house:
 
 	width = 10*2
 	height = int(7.5*2) # Convert float to int
-	free = 3*2
-	value = 399000
+	min_free = 3*2
+	worth = 399000
+	value = 3
 
-	def __init__(self, width, height, free, value):
-		self.width = width
-		self.height = height
-		self.free = free
-		self.value = value
+	instances = []
+
+	def __init__(self, x, y, name=None):
+		self.__class__.instances.append(weakref.proxy(self))
+		self.x = x
+		self.y = y
+		self.name = name
 
 class big_house:
 
 	width = 11*2
 	height = int(10.5*2) # Convert float to int
-	free = 6*2
-	value = 610000
+	min_free = 6*2
+	worth = 610000
+	value = 4
 
-	def __init__(self, width, height, free, value):
-		self.width = width
-		self.height = height
-		self.free = free
-		self.value = value
+	instances = []
+
+	def __init__(self, x, y, name=None):
+		self.__class__.instances.append(weakref.proxy(self))
+		self.x = x
+		self.y = y
+		self.name = name
      
+# Test
+#house1 = small_house(10,20, "house1")
+#house2 = small_house(30,40, "house2")
+#house3 = small_house(50,60, "house3")
+#house4 = small_house(70,80, "house4")
+#house5 = small_house(90,100, "house5")
+#house6 = small_house(110,120, "house6")
+#for instance in small_house.instances:
+#    print(instance.name, instance.x, instance.y)
+
+
 # Define map size and structures
 WIDTH=320
 HEIGHT=300
@@ -79,6 +100,14 @@ def add_structure(tdlist, start_x, start_y, value, heigth, width, amount):
 				return tdlistcopy, amount+1
 			else:
 				tdlist[y][x] = value
+				#if value == 2:
+				#	print "value is 2"
+				#elif value == 3:
+				#	print "value is 3"
+				#elif value == 4:
+				#	print "value is 4"
+				#else:
+				#	print "Water class not done"
 	# Should only append if no overlap, but now appends everything
 	STRUCTURELIST.append(((start_x,start_y), (start_x+width, start_y+heigth), (value)))
 	return tdlist, amount	
@@ -90,17 +119,17 @@ def add_water(amount, tdlist):
 
 def add_small_house(amount, tdlist):
 	while amount !=0:
-		tdlist, amount = add_structure(tdlist, randint(small_house.free,WIDTH-small_house.free-small_house.width), randint(small_house.free,HEIGHT-small_house.free-small_house.height), HOUSE_SMALL, small_house.height, small_house.width, amount)
+		tdlist, amount = add_structure(tdlist, randint(small_house.min_free,WIDTH-small_house.min_free-small_house.width), randint(small_house.min_free,HEIGHT-small_house.min_free-small_house.height), HOUSE_SMALL, small_house.height, small_house.width, amount)
 		amount -=1
 
 def add_medium_house(amount, tdlist):
 	while amount !=0:
-		tdlist, amount = add_structure(tdlist, randint(medium_house.free,WIDTH-medium_house.free-medium_house.width), randint(medium_house.free,HEIGHT-medium_house.free-medium_house.height), HOUSE_MEDIUM, medium_house.height, medium_house.width, amount)
+		tdlist, amount = add_structure(tdlist, randint(medium_house.min_free,WIDTH-medium_house.min_free-medium_house.width), randint(medium_house.min_free,HEIGHT-medium_house.min_free-medium_house.height), HOUSE_MEDIUM, medium_house.height, medium_house.width, amount)
 		amount -=1
 
 def add_big_house(amount, tdlist):
 	while amount !=0:
-		tdlist, amount = add_structure(tdlist, randint(big_house.free,WIDTH-big_house.free-big_house.width), randint(big_house.free,HEIGHT-big_house.free-big_house.height), HOUSE_LARGE, big_house.height, big_house.width, amount)
+		tdlist, amount = add_structure(tdlist, randint(big_house.min_free,WIDTH-big_house.min_free-big_house.width), randint(big_house.min_free,HEIGHT-big_house.min_free-big_house.height), HOUSE_LARGE, big_house.height, big_house.width, amount)
 		amount -=1
 			
 def old_draw_array(tdlist):
@@ -161,10 +190,10 @@ def new_draw_array(tdlist):
 two_d_list = make_list()
 
 # Adds structues on random places
-add_water(randint(1,4), two_d_list)
-add_small_house(12, two_d_list)
-add_medium_house(6, two_d_list)
-add_big_house(5, two_d_list)
+#add_water(randint(1,4), two_d_list)
+#add_small_house(12, two_d_list)
+#add_medium_house(6, two_d_list)
+#add_big_house(5, two_d_list)
 
 # Draws the list
-new_draw_array(two_d_list)
+#new_draw_array(two_d_list)
