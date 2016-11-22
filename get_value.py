@@ -34,7 +34,7 @@ def score(struclist):
 		for count in range(len(thelist)):
 			other_house = check_surrounding(start_y - count, end_y + count, start_x - count, end_x + count, count, copy_list)
 			
-			if other_house != None:
+			if other_house != []:
 				shortest_distance = distance(coordinates_selected_house, other_house)
 				print shortest_distance
 				break
@@ -52,18 +52,18 @@ def check_surrounding(start_y, end_y, start_x, end_x, count, copy_list):
 	list = copy_list[start_y:end_y]
 	base_list = []	
 	count_y = 0
-	
+	return_list = []
 	for y in list:
 		x_row = y[start_x:end_x]
 		base_list.append(x_row)
-		if 1 in base_list[-1]:
+		if 1 in base_list[-1] or 2 in base_list[-1] or 3 in base_list[-1]:
 			print x_row
 			print "^ found other building"
-			return [count_y + start_y, base_list[-1].index(1)+start_x]
+			return_list.append([count_y + start_y, base_list[-1].index(1)+start_x])
 		print x_row	
 		count_y += 1		
 	print " "
-	return None
+	return return_list
 	
 	
 def check_negative(number):
@@ -75,8 +75,9 @@ def check_negative(number):
 	
 def distance(house_1, house_2):
 	distances = []
-	for coordinate in house_1:
-		distances.append(math.sqrt(math.pow(coordinate[0] - house_2[0], 2)+math.pow(coordinate[1] - house_2[1],2 )))
+	for coordinate_1 in house_1:
+		for coordinate_2 in house_2:
+			distances.append(math.sqrt(math.pow(coordinate_1[0] - coordinate_2[0], 2)+math.pow(coordinate_1[1] - coordinate_2[1],2 )))
 	return min(distances)
 		
 
