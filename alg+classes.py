@@ -16,10 +16,8 @@ class small_house:
 	value = 2
 
 	instances = []
-	idlist = []
 
 	def __init__(self, x, y, ID=None):
-		self.__class__.instances.append(weakref.proxy(self))
 		self.x = x
 		self.y = y
 		self.ID = ID
@@ -33,10 +31,8 @@ class medium_house:
 	value = 3
 
 	instances = []
-	idlist = []
 
 	def __init__(self, x, y, ID=None):
-		self.__class__.instances.append(weakref.proxy(self))
 		self.x = x
 		self.y = y
 		self.ID = ID
@@ -50,30 +46,11 @@ class big_house:
 	value = 4
 
 	instances = []
-	idlist = []
 
 	def __init__(self, x, y, ID=None):
-		self.__class__.instances.append(weakref.proxy(self))
 		self.x = x
 		self.y = y
 		self.ID = ID
-
-def updateidlist(idlist):
-	# idlist is bv small_house.idlist
-	if idlist != []:
-		idlist.append(idlist[-1] + 1)
-	else:
-		idlist.append(0)
-	return idlist
-
-### Example!
-# Add instances with incrementing id
-alist = [big_house(0,20,i) for i in range(10)]
-
-# Print all instances of class
-for instance in big_house.instances:
-    print(instance.ID, instance.x, instance.y)
-###
 
 # Define map size and structures
 WIDTH=320
@@ -177,6 +154,15 @@ def add_structure(tdlist, start_x, start_y, value, height, width, amount):
 		
 	# Should only append if no overlap
 	STRUCTURELIST.append(((start_x,start_y), (start_x+width, start_y+height), (value)))
+
+	# Add instances of structure to correct class
+	# Amount here is just an identifier
+	if value == 2:
+		small_house.instances.append(small_house(start_x, start_y, amount))
+	elif value == 3:
+		medium_house.instances.append(medium_house(start_x, start_y, amount))
+	elif value == 4:
+		big_house.instances.append(big_house(start_x, start_y, amount))
 	return tdlist, amount	
 	
 def score(struclist, tdlist):
@@ -346,10 +332,10 @@ def new_draw_array(tdlist):
 two_d_list = make_list()
 
 # Variant 1
-#createWater(two_d_list)
-#add_big_house(3, two_d_list)
-#add_medium_house(5, two_d_list)
-#add_small_house(12, two_d_list)
+createWater(two_d_list)
+add_big_house(3, two_d_list)
+add_medium_house(5, two_d_list)
+add_small_house(12, two_d_list)
 
 # Variant 2
 #createWater(two_d_list)
@@ -362,6 +348,15 @@ two_d_list = make_list()
 #add_big_house(9, two_d_list)
 #add_medium_house(15, two_d_list)
 #add_small_house(36, two_d_list)
+print "SMALL HOUSES"
+for instance in small_house.instances:
+    print(instance.ID, instance.x, instance.y)
+print "MEDIUM HOUSES"
+for instance in medium_house.instances:
+    print(instance.ID, instance.x, instance.y)
+print "BIG HOUSES"
+for instance in big_house.instances:
+    print(instance.ID, instance.x, instance.y)
 
 # Draws the list
 #new_draw_array(two_d_list)
