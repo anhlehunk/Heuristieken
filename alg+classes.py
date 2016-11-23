@@ -66,13 +66,14 @@ def updateidlist(idlist):
 		idlist.append(0)
 	return idlist
 
+### Example!
 # Add instances with incrementing id
 alist = [big_house(0,20,i) for i in range(10)]
 
 # Print all instances of class
 for instance in big_house.instances:
     print(instance.ID, instance.x, instance.y)
-
+###
 
 # Define map size and structures
 WIDTH=320
