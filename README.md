@@ -21,3 +21,14 @@ State space bepalen
 
 Classes toevoegen aan algoritme
 
+## W4
+Score functie toegevoegd
+
+Minimale vrijstand functie toegevoegd
+
+Random water functie toegevoegd
+
+Compleet werkend Algoritme
+
+Varianten 2 en 3 duren te lang met random
+
