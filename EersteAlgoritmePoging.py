@@ -1,8 +1,11 @@
 from graphics import *
 from random import randint
+from random import uniform as rand
+from random import choice
 import weakref
 import copy
 import math
+
 
 # Classes
 class small_house:
@@ -60,13 +63,14 @@ class big_house:
 #house4 = small_house(70,80, "house4")
 #house5 = small_house(90,100, "house5")
 #house6 = small_house(110,120, "house6")
-for instance in small_house.instances:
-    print(instance.name, instance.x, instance.y)
+#for instance in small_house.instances:
+ #   print(instance.name, instance.x, instance.y)
 
 
 # Define map size and structures
 WIDTH=320
 HEIGHT=300
+WATERSURFACE = WIDTH*HEIGHT*.2
 STRUCTURELIST=[]
 
 # Values for different type of structures
@@ -84,7 +88,28 @@ def make_list():
 	# Makes empty 2d list with dimensions height x width
 	newlist = [[0 for i in range(WIDTH)]for j in range(HEIGHT)]
 	return newlist
+	
+def createWater(tdlist):
+	
+	surfaces = [.25 * WATERSURFACE for x in range(4)]
+	total = 0
 
+	for water in surfaces:
+		dimension = math.sqrt(water)
+		new_proportion = rand(1,2)
+		dimensions = [int(dimension * new_proportion), int(dimension / new_proportion)]
+		width_water = choice(dimensions)
+		dimensions.remove(width_water)
+		height_water = dimensions[0]
+		amount = 1
+		while amount !=0:
+			start_x = randint(0,WIDTH-width_water-1)
+			start_y = randint(0,HEIGHT-height_water-1)
+			tdlist, amount = add_structure(tdlist, start_x, start_y, 1, height_water, width_water, 1)
+			amount-=1
+		#STRUCTURELIST.append(((start_x,start_y),(start_x+width_water, start_y+height_water),1))
+		
+		
 def add_structure(tdlist, start_x, start_y, value, height, width, amount):
 	# Adds an item to 2d list
 	# Start_x: top left x coordinate (int)
@@ -93,30 +118,42 @@ def add_structure(tdlist, start_x, start_y, value, height, width, amount):
 	# Height: height of structure to add (int)
 	# Width: width of structure to add (int)
 	# TODO check to see if out of range
-	end_y = start_y + height + 1
-	end_x = start_x + width + 1
+	end_y_range = start_y + height + 1
+	end_x_range = start_x + width + 1
 	copy_list = copy.deepcopy(tdlist)
-	for x in range(start_x, end_x):
-		for y in range(start_y, end_y):
+	for x in range(start_x, end_x_range):
+		for y in range(start_y, end_y_range):
 			if tdlist[y][x] != 0:
-				print "overlap found, placing again."
+				print "overlap found, placing again.    ", len(STRUCTURELIST),"houses placed, ", value, "is selected type house"
+				
 				return tdlist, amount+1
 			else:
 				tdlist[y][x] = value
 	# Below we check if there is enough free space for the houses which are placed
 	#Water doesnt need this, so we start at the value of a small house.
 	# Only checks the surroundings of the minimal free space!
+	if value == 1:
+		other_house = []
 	if value == 2:
 		space = small_house.min_free
-		other_house = check_surrounding(start_y - space, end_y + space, start_x - space, end_x + space, copy_list)
+		other_house = check_surrounding(start_y - space, end_y_range + space, start_x - space, end_x_range + space, copy_list)
 		
 	if value == 3:
 		space = medium_house.min_free
-		other_house = check_surrounding(start_y - space, end_y + space, start_x - space, end_x + space, copy_list)
+		other_house = check_surrounding(start_y - space, end_y_range + space, start_x - space, end_x_range + space, copy_list)
 		
 	if value == 4:
 		space = big_house.min_free
-		other_house = check_surrounding(start_y - space, end_y + space, start_x - space, end_x + space, copy_list)
+		other_house = check_surrounding(start_y - space, end_y_range + space, start_x - space, end_x_range + space, copy_list)
+		
+	if other_house == [] and value != 1:
+		for x in range(start_x - space, end_x_range + space):
+			for y in range(start_y - space, end_y_range + space):
+				if x < 0 or y < 0 or x > WIDTH-1 or y > HEIGHT-1:
+					print "Free space out of bounds"
+					return tdlist, amount+1
+				if tdlist[y][x]== 0:
+					tdlist[y][x] = 9
 	
 	#If there is something in the free space, other house will NOT be equal to an empty list
 	if other_house != []:
@@ -128,19 +165,26 @@ def add_structure(tdlist, start_x, start_y, value, height, width, amount):
 				#	print "value is 4"
 				#else:
 				#	print "Water class not done"
-	# Should only append if no overlap, but now appends everything
+				
+	
+		
+	# Should only append if no overlap
+	
 	STRUCTURELIST.append(((start_x,start_y), (start_x+width, start_y+height), (value)))
 	return tdlist, amount	
 	
 def score(struclist, tdlist):
 	total_value = 0
+	test = []
 	for i in struclist:
 		start_y = i[0][1]
 		end_y = i[1][1]+1 
 		start_x = i[0][0]
 		end_x = i[1][0]+1
 		if i[2] == 1:
-			break
+			worth = 0
+			minimal_free_space = 0
+			percentage_increase_value = 0
 		#Sets values for all the different kinds of houses
 		if i[2] == 2:
 			worth = small_house.worth
@@ -171,6 +215,7 @@ def score(struclist, tdlist):
 				total_value += worth*(1+added_value)
 				break
 	print total_value
+	print test
 	
 def check_surrounding(start_y, end_y, start_x, end_x, copy_list):
 
@@ -294,19 +339,29 @@ def new_draw_array(tdlist):
 # Make list from HEIGHT and WIDTH
 two_d_list = make_list()
 
-# Adds structues on random places
-#add_water(randint(1,4), two_d_list)
-
-
-add_small_house(20, two_d_list) #volgorde belangrijk mbt vrijstand! Restriction is strenger voor grotere huizen dus die moeten later geplaatst worden
-add_medium_house(8, two_d_list)
-add_big_house(5, two_d_list)
-
+# Adds structures on random places
+	
+ 
+#Variant 1
+createWater(two_d_list)
+add_big_house(3, two_d_list)
+add_medium_house(5, two_d_list)
+add_small_house(12, two_d_list)
+#Variant 2
+#createWater(two_d_list)
+#add_big_house(6, two_d_list)
+#add_medium_house(10, two_d_list)
+#add_small_house(24, two_d_list)
+#Variant 3
+#createWater(two_d_list)
+#add_big_house(9, two_d_list)
+#add_medium_house(15, two_d_list)
+#add_small_house(36, two_d_list)
 
 
 # Draws the list
 new_draw_array(two_d_list)
 
 # Prints Total value
-print STRUCTURELIST
 score(STRUCTURELIST, two_d_list)
+
