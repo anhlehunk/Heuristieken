@@ -79,36 +79,31 @@ HOUSE_SMALL=2
 HOUSE_MEDIUM=3
 HOUSE_LARGE=4
 
-def print_list(list):
-	# Prints every sublist on a new ine
-	for i in list:
-		print i
-
 def make_list():
 	# Makes empty 2d list with dimensions height x width
 	newlist = [[0 for i in range(WIDTH)]for j in range(HEIGHT)]
 	return newlist
 	
 def createWater(tdlist):
-	
+	#makes 4 water structures of equal size in surface
 	surfaces = [.25 * WATERSURFACE for x in range(4)]
-	total = 0
-
+	#changes dimensions of the water structures below
 	for water in surfaces:
 		dimension = math.sqrt(water)
+		#Makes sure that the proportion is not more than 1:4
 		new_proportion = rand(1,2)
 		dimensions = [int(dimension * new_proportion), int(dimension / new_proportion)]
 		width_water = choice(dimensions)
 		dimensions.remove(width_water)
 		height_water = dimensions[0]
+		#Adds One water structure at a time
 		amount = 1
 		while amount !=0:
 			start_x = randint(0,WIDTH-width_water-1)
 			start_y = randint(0,HEIGHT-height_water-1)
 			tdlist, amount = add_structure(tdlist, start_x, start_y, 1, height_water, width_water, 1)
 			amount-=1
-		#STRUCTURELIST.append(((start_x,start_y),(start_x+width_water, start_y+height_water),1))
-		
+
 		
 def add_structure(tdlist, start_x, start_y, value, height, width, amount):
 	# Adds an item to 2d list
@@ -121,9 +116,12 @@ def add_structure(tdlist, start_x, start_y, value, height, width, amount):
 	end_y_range = start_y + height + 1
 	end_x_range = start_x + width + 1
 	copy_list = copy.deepcopy(tdlist)
+	#Checks whether the coordinate is already taken by free space or other building/water
 	for x in range(start_x, end_x_range):
 		for y in range(start_y, end_y_range):
 			if tdlist[y][x] != 0:
+				#Here there is something else on the coordinate on which we wanted to place a house/water
+				#This results in this function being called again because the conditions are not met.
 				print "overlap found, placing again.    ", len(STRUCTURELIST),"houses placed, ", value, "is selected type house"
 				
 				return tdlist, amount+1
@@ -132,30 +130,37 @@ def add_structure(tdlist, start_x, start_y, value, height, width, amount):
 	# Below we check if there is enough free space for the houses which are placed
 	#Water doesnt need this, so we start at the value of a small house.
 	# Only checks the surroundings of the minimal free space!
+	#If there is something else in the surrounding -----> other_house != [] 
+	
+	#Surrounding of water doesnt need to be checked, so with value ==1 there is nothing else in the vacinity
 	if value == 1:
 		other_house = []
+	#Checks surroundings if we are placing a small house
 	if value == 2:
 		space = small_house.min_free
 		other_house = check_surrounding(start_y - space, end_y_range + space, start_x - space, end_x_range + space, copy_list)
-		
+	#Checks surroundings if we are placing a medium house
 	if value == 3:
 		space = medium_house.min_free
 		other_house = check_surrounding(start_y - space, end_y_range + space, start_x - space, end_x_range + space, copy_list)
-		
+	#Checks surroundings if we are placing a small house	
 	if value == 4:
 		space = big_house.min_free
 		other_house = check_surrounding(start_y - space, end_y_range + space, start_x - space, end_x_range + space, copy_list)
-		
+	#If there are no other houses in the free space of the house, free space is added for the selected house so that nothing else is placed in it later on.
+	#This results in this function being called again because the conditions are not met.
 	if other_house == [] and value != 1:
 		for x in range(start_x - space, end_x_range + space):
 			for y in range(start_y - space, end_y_range + space):
+				#To make sure that the x and y are not out of bounds (negative or larger than the WIDTH and HEIGHT)
 				if x < 0 or y < 0 or x > WIDTH-1 or y > HEIGHT-1:
 					print "Free space out of bounds"
-					return tdlist, amount+1
+					return tdlist, amount+1 
 				if tdlist[y][x]== 0:
 					tdlist[y][x] = 9
 	
 	#If there is something in the free space, other house will NOT be equal to an empty list
+	#This results in this function being called again because the conditions are not met.
 	if other_house != []:
 		print "Another house has been located in the minimal free space"
 		return tdlist, amount+1
@@ -215,7 +220,6 @@ def score(struclist, tdlist):
 				total_value += worth*(1+added_value)
 				break
 	print total_value
-	print test
 	
 def check_surrounding(start_y, end_y, start_x, end_x, copy_list):
 
@@ -233,6 +237,7 @@ def check_surrounding(start_y, end_y, start_x, end_x, copy_list):
 		base_list.append(x_row)
 		count_x = 0
 		#Checks if there are other buildings for each row at a time
+		#Returns either an empty list if no other buildings are found, but else it returns the coordinates of locations which are already being used.
 		for x in base_list[-1]:
 			if x == 2:
 				print "^ found small building"
