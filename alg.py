@@ -351,7 +351,8 @@ for i in range(10):
 	value = score(STRUCTURELIST, two_d_list)
 
 	testdict.update({ value : STRUCTURELIST })
-  STRUCTURELIST = []
+        STRUCTURELIST = []
+        #misschien nog meer lijsten die gereset moeten worden
 
 
 print testdict
