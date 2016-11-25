@@ -1,5 +1,5 @@
 ## To Do
-## Zet je naam erachter als je daar naar gaat kijken voor volgende week dinsdag!
+# Zet je naam erachter als je het gaat doen voor volgende week dinsdag!
 - Grid in grid maken, maakt het mogelijk om "random" voor alle varianten te laten werken.(Tom)
 
 - Sneller maken van algoritme. Aanmaken van het eerste grid(oplossing) mag lang duren! Het is namelijk zo dat als je gaat schuiven/ verplaatsen dat je meteen al een nieuwe variant hebt waardoor de oplossingen NA de eerste gevonden oplossing van een variant korter duurt. De score functie moet echter wel sneller, aangezien deze na elke mutatie moet worden gerund en deze nu best lang duurt. De duur komt wellicht door het herhaalde aanmaken van een deep copy. Dit kost veel geheugen.
