@@ -5,6 +5,10 @@ from random import choice
 import weakref
 import copy
 import math
+import cPickle
+
+# Command used to write all command line output to a file
+# python -m cProfile -s time alg.py > cmdoutput.text 2>&1
 
 # Classes
 class small_house:
@@ -102,7 +106,10 @@ def add_structure(tdlist, start_x, start_y, value, height, width, amount):
 	# TODO check to see if out of range
 	end_y_range = start_y + height + 1
 	end_x_range = start_x + width + 1
-	copy_list = copy.deepcopy(tdlist)
+
+	# Replaced deepcopy with nested list comprehension. Much faster
+	copy_list = [[i for i in j] for j in tdlist]
+
 	# Checks whether the coordinate is already taken by free space or other building/water
 	for x in range(start_x, end_x_range):
 		for y in range(start_y, end_y_range):
@@ -191,7 +198,9 @@ def score(struclist, tdlist):
 			minimal_free_space = big_house.min_free
 			percentage_increase_value = 0.06
 
-		copy_list = copy.deepcopy(tdlist)
+		# Replaced deepcopy with nested list comprehension. Much faster
+		copy_list = [[i for i in j] for j in tdlist]
+
 		coordinates_selected_house = []
 
 		for x in range(start_x, end_x):
@@ -334,10 +343,14 @@ def new_draw_array(tdlist):
 	win.getMouse()
 	win.close()
 
+structuredict = {}
 
-testdict = {}
-
+# Generate 10 maps
 for i in range(10):
+	# Debug printing
+	print "TESTDICT", testdict
+	print "STUCLIST", STRUCTURELIST
+	
 	# Make list from HEIGHT and WIDTH
 	two_d_list = make_list()
 
@@ -350,13 +363,30 @@ for i in range(10):
 	# Prints Total value
 	value = score(STRUCTURELIST, two_d_list)
 
-	testdict.update({ value : STRUCTURELIST })
-        STRUCTURELIST = []
-        #misschien nog meer lijsten die gereset moeten worden
+	# Add new entry to structuredict
+	structuredict.update({ value : STRUCTURELIST })
 
+	# Reset structurelist
+	STRUCTURELIST = []
 
-print testdict
+# Used to write structuredict to file for analysis
+def writetofile( file, input):
+	# Write dict to file, used for calculations
+	with open( file, 'w' ) as f:
+		f.write("{}\n".format(input))
 
+# Used to read structuredict from file
+def readfile( file ):
+	result  = []
+	with open( file ) as f:
+		for line in f:	
+			result.append( line )
+
+	return result
+
+# Write/read
+#writetofile("dict.txt", testdict)
+#readfile("dict.txt")
 
 # Draws the list
 #new_draw_array(two_d_list)
@@ -372,15 +402,7 @@ print testdict
 #add_big_house(9, two_d_list)
 #add_medium_house(15, two_d_list)
 #add_small_house(36, two_d_list)
-#print "SMALL HOUSES"
-#for instance in small_house.instances:
-#    print(instance.ID, instance.x, instance.y)
-#print "MEDIUM HOUSES"
-#for instance in medium_house.instances:
-#    print(instance.ID, instance.x, instance.y)
-#print "BIG HOUSES"
-#for instance in big_house.instances:
-#    print(instance.ID, instance.x, instance.y)
+
 
 
 
