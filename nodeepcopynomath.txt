@@ -1,0 +1,260 @@
+
+  696678 function calls (696668 primitive calls) in 3.955 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+       79    1.445    0.018    1.466    0.019 alg.py:98(add_structure)
+       24    1.320    0.055    1.534    0.064 alg.py:258(distance)
+        1    0.362    0.362    2.099    2.099 alg.py:174(score)
+      356    0.211    0.001    0.215    0.001 alg.py:220(check_surrounding)
+        1    0.179    0.179    0.179    0.179 {_tkinter.create}
+   690837    0.122    0.000    0.122    0.000 {method 'append' of 'list' objects}
+       56    0.099    0.002    0.099    0.002 {min}
+        1    0.057    0.057    1.003    1.003 alg.py:272(add_small_house)
+        1    0.020    0.020    0.022    0.022 alg.py:70(make_list)
+        1    0.020    0.020    0.037    0.037 FixTk.py:1(<module>)
+        1    0.013    0.013    0.252    0.252 alg.py:277(add_medium_house)
+        1    0.011    0.011    0.013    0.013 __init__.py:4(<module>)
+        1    0.011    0.011    0.246    0.246 graphics.py:61(<module>)
+        3    0.011    0.004    0.011    0.004 {built-in method call}
+        1    0.011    0.011    0.206    0.206 alg.py:282(add_big_house)
+        1    0.010    0.010    3.955    3.955 alg.py:1(<module>)
+        1    0.007    0.007    0.007    0.007 {function seed at 0x02618F70}
+     2616    0.007    0.000    0.007    0.000 {range}
+        1    0.005    0.005    0.022    0.022 random.py:40(<module>)
+        1    0.005    0.005    0.044    0.044 Tkinter.py:31(<module>)
+        1    0.005    0.005    0.005    0.005 hashlib.py:55(<module>)
+        1    0.005    0.005    0.094    0.094 alg.py:75(createWater)
+        1    0.003    0.003    0.003    0.003 {nt.urandom}
+      158    0.002    0.000    0.002    0.000 random.py:175(randrange)
+      158    0.001    0.000    0.003    0.000 random.py:238(randint)
+        1    0.001    0.001    0.001    0.001 {__import__}
+        7    0.001    0.000    0.001    0.000 {nt.stat}
+       14    0.001    0.000    0.001    0.000 __init__.py:147(_check_size)
+        6    0.001    0.000    0.001    0.000 {nt._isdir}
+     1424    0.000    0.000    0.000    0.000 alg.py:252(check_negative)
+        1    0.000    0.000    0.002    0.002 FixTk.py:21(convert_path)
+        2    0.000    0.000    0.000    0.000 {nt.listdir}
+        1    0.000    0.000    0.000    0.000 mbcs.py:9(<module>)
+        1    0.000    0.000    0.000    0.000 _endian.py:4(<module>)
+        4    0.000    0.000    0.000    0.000 {nt.putenv}
+        3    0.000    0.000    0.000    0.000 __init__.py:78(CFUNCTYPE)
+        1    0.000    0.000    0.000    0.000 __init__.py:297(create_unicode_buffer)
+        1    0.000    0.000    0.001    0.001 Tkinter.py:1814(readprofile)
+        3    0.000    0.000    0.000    0.000 __init__.py:493(PYFUNCTYPE)
+       27    0.000    0.000    0.000    0.000 ntpath.py:95(splitdrive)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:374(Misc)
+      166    0.000    0.000    0.000    0.000 {method 'random' of '_random.Random' objects}
+        1    0.000    0.000    0.000    0.000 sre_compile.py:258(_mk_bitmap)
+      4/2    0.000    0.000    0.000    0.000 sre_parse.py:379(_parse)
+        2    0.000    0.000    0.000    0.000 {_ctypes.POINTER}
+        2    0.000    0.000    0.000    0.000 __init__.py:349(__init__)
+        1    0.000    0.000    0.011    0.011 random.py:100(seed)
+  163/161    0.000    0.000    0.000    0.000 {len}
+       13    0.000    0.000    0.000    0.000 ntpath.py:62(join)
+        1    0.000    0.000    0.000    0.000 {binascii.hexlify}
+        2    0.000    0.000    0.000    0.000 sre_compile.py:207(_optimize_charset)
+        4    0.000    0.000    0.000    0.000 __init__.py:382(__getitem__)
+      4/2    0.000    0.000    0.000    0.000 sre_compile.py:32(_compile)
+        1    0.000    0.000    0.180    0.180 Tkinter.py:1744(__init__)
+        1    0.000    0.000    0.000    0.000 __init__.py:265(_reset_cache)
+        2    0.000    0.000    0.000    0.000 sre_compile.py:359(_compile_info)
+        1    0.000    0.000    0.000    0.000 __future__.py:48(<module>)
+       18    0.000    0.000    0.000    0.000 sre_parse.py:182(__next)
+       12    0.000    0.000    0.000    0.000 alg.py:23(__init__)
+        2    0.000    0.000    0.001    0.001 re.py:226(_compile)
+        6    0.000    0.000    0.000    0.000 hashlib.py:94(__get_openssl_constructor)
+        2    0.000    0.000    0.001    0.001 sre_compile.py:493(compile)
+       18    0.000    0.000    0.000    0.000 {_struct.calcsize}
+        4    0.000    0.000    0.000    0.000 genericpath.py:26(isfile)
+      4/2    0.000    0.000    0.000    0.000 sre_parse.py:140(getwidth)
+        1    0.000    0.000    0.001    0.001 __init__.py:71(search_function)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1774(_loadtk)
+        4    0.000    0.000    0.000    0.000 random.py:358(uniform)
+        1    0.000    0.000    0.000    0.000 random.py:72(Random)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:3316(PhotoImage)
+      4/2    0.000    0.000    0.000    0.000 sre_parse.py:301(_parse_sub)
+        2    0.000    0.000    0.000    0.000 sre_parse.py:677(parse)
+       22    0.000    0.000    0.000    0.000 {isinstance}
+        2    0.000    0.000    0.000    0.000 sre_compile.py:178(_compile_charset)
+       28    0.000    0.000    0.000    0.000 {method 'startswith' of 'str' objects}
+        4    0.000    0.000    0.000    0.000 __init__.py:375(__getattr__)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2880(Text)
+       24    0.000    0.000    0.000    0.000 {method 'replace' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2183(Canvas)
+        1    0.000    0.000    0.000    0.000 graphics.py:206(GraphWin)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1535(Wm)
+       14    0.000    0.000    0.000    0.000 sre_parse.py:201(get)
+        2    0.000    0.000    0.000    0.000 {built-in method getvar}
+        4    0.000    0.000    0.000    0.000 random.py:273(choice)
+        5    0.000    0.000    0.000    0.000 {math.sqrt}
+        1    0.000    0.000    0.000    0.000 codecs.py:77(__new__)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1145(_register)
+        1    0.000    0.000    0.001    0.001 {method 'decode' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2649(Menu)
+        4    0.000    0.000    0.000    0.000 os.py:421(__setitem__)
+        5    0.000    0.000    0.000    0.000 alg.py:38(__init__)
+        4    0.000    0.000    0.000    0.000 os.py:444(__contains__)
+        8    0.000    0.000    0.000    0.000 sre_parse.py:130(__getitem__)
+        3    0.000    0.000    0.000    0.000 genericpath.py:15(exists)
+        2    0.000    0.000    0.001    0.000 sre_compile.py:478(_code)
+        1    0.000    0.000    0.000    0.000 Tkconstants.py:4(<module>)
+       34    0.000    0.000    0.000    0.000 {_ctypes.sizeof}
+       16    0.000    0.000    0.000    0.000 sre_parse.py:195(match)
+        1    0.000    0.000    0.000    0.000 {_ctypes.LoadLibrary}
+        1    0.000    0.000    0.000    0.000 mbcs.py:38(getregentry)
+        1    0.000    0.000    0.000    0.000 graphics.py:724(Text)
+        1    0.000    0.000    0.000    0.000 __init__.py:49(normalize_encoding)
+        1    0.000    0.000    0.000    0.000 genericpath.py:85(_splitext)
+        1    0.000    0.000    0.000    0.000 ntpath.py:173(split)
+        1    0.000    0.000    0.000    0.000 {math.exp}
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2558(Listbox)
+        3    0.000    0.000    0.000    0.000 {built-in method createcommand}
+        1    0.000    0.000    0.000    0.000 {time.time}
+        3    0.000    0.000    0.000    0.000 alg.py:53(__init__)
+        6    0.000    0.000    0.000    0.000 {getattr}
+        7    0.000    0.000    0.000    0.000 __future__.py:75(__init__)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1697(wm_protocol)
+        6    0.000    0.000    0.000    0.000 {method 'remove' of 'list' objects}
+        1    0.000    0.000    0.011    0.011 random.py:91(__init__)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1960(Grid)
+        2    0.000    0.000    0.000    0.000 {_sre.compile}
+        1    0.000    0.000    0.000    0.000 Tkinter.py:3571(PanedWindow)
+        1    0.000    0.000    0.000    0.000 alg.py:28(medium_house)
+        2    0.000    0.000    0.000    0.000 sre_parse.py:72(opengroup)
+        1    0.000    0.000    0.000    0.000 {_codecs.mbcs_decode}
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2453(Entry)
+        1    0.000    0.000    0.000    0.000 graphics.py:440(GraphicsObject)
+        4    0.000    0.000    0.000    0.000 sre_compile.py:472(isstring)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:198(Variable)
+        1    0.000    0.000    0.011    0.011 Tkinter.py:962(update)
+        1    0.000    0.000    0.000    0.000 __init__.py:432(__getattr__)
+        1    0.000    0.000    0.000    0.000 random.py:805(SystemRandom)
+        1    0.000    0.000    0.000    0.000 random.py:655(WichmannHill)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:3391(Spinbox)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2840(Scrollbar)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1740(Tk)
+        2    0.000    0.000    0.000    0.000 sre_parse.py:225(_class_escape)
+        2    0.000    0.000    0.000    0.000 sre_parse.py:178(__init__)
+        1    0.000    0.000    0.011    0.011 graphics.py:190(update)
+        1    0.000    0.000    0.000    0.000 {method 'encode' of 'unicode' objects}
+        4    0.000    0.000    0.000    0.000 sre_parse.py:138(append)
+        1    0.000    0.000    0.000    0.000 alg.py:13(small_house)
+        1    0.000    0.000    0.000    0.000 graphics.py:576(_BBox)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:3256(Image)
+        8    0.000    0.000    0.000    0.000 {method 'get' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 __init__.py:332(CDLL)
+        4    0.000    0.000    0.000    0.000 sre_parse.py:90(__init__)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1865(Pack)
+        8    0.000    0.000    0.000    0.000 {method 'upper' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 graphics.py:783(Entry)
+        2    0.000    0.000    0.001    0.001 re.py:188(compile)
+        2    0.000    0.000    0.000    0.000 sre_parse.py:83(closegroup)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:342(BooleanVar)
+        1    0.000    0.000    0.000    0.000 graphics.py:550(Point)
+        4    0.000    0.000    0.000    0.000 sre_parse.py:126(__len__)
+        1    0.000    0.000    0.000    0.000 graphics.py:874(Image)
+        1    0.000    0.000    0.000    0.000 {_ctypes.set_conversion_mode}
+        1    0.000    0.000    0.000    0.000 ntpath.py:198(splitext)
+        1    0.000    0.000    0.000    0.000 alg.py:43(big_house)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1733(wm_withdraw)
+        5    0.000    0.000    0.000    0.000 {setattr}
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2104(Button)
+        1    0.000    0.000    0.000    0.000 mbcs.py:20(decode)
+        1    0.000    0.000    0.000    0.000 {_hashlib.openssl_md5}
+        2    0.000    0.000    0.000    0.000 sre_parse.py:67(__init__)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1910(Place)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2807(Scale)
+        2    0.000    0.000    0.000    0.000 {hasattr}
+        1    0.000    0.000    0.000    0.000 Tkinter.py:298(IntVar)
+        3    0.000    0.000    0.000    0.000 __init__.py:494(CFunctionType)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2013(BaseWidget)
+        1    0.000    0.000    0.000    0.000 ntpath.py:205(basename)
+        1    0.000    0.000    0.000    0.000 __future__.py:74(_Feature)
+        2    0.000    0.000    0.000    0.000 __init__.py:359(_FuncPtr)
+        1    0.000    0.000    0.000    0.000 graphics.py:663(Line)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2424(Checkbutton)
+        1    0.000    0.000    0.000    0.000 __init__.py:243(c_char_p)
+        1    0.000    0.000    0.000    0.000 {_hashlib.openssl_sha384}
+        4    0.000    0.000    0.000    0.000 __init__.py:429(__init__)
+        3    0.000    0.000    0.000    0.000 __init__.py:104(CFunctionType)
+        1    0.000    0.000    0.000    0.000 mbcs.py:23(IncrementalEncoder)
+        2    0.000    0.000    0.000    0.000 {math.log}
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1493(XView)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1514(YView)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2780(Radiobutton)
+        1    0.000    0.000    0.000    0.000 graphics.py:402(Transform)
+        1    0.000    0.000    0.000    0.000 {method 'update' of 'dict' objects}
+        2    0.000    0.000    0.000    0.000 {method 'join' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 __init__.py:388(PyDLL)
+        1    0.000    0.000    0.000    0.000 {built-in method __new__ of type object at 0x1E229458}
+        3    0.000    0.000    0.000    0.000 {method 'rfind' of 'str' objects}
+        6    0.000    0.000    0.000    0.000 {globals}
+        1    0.000    0.000    0.000    0.000 graphics.py:691(Polygon)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:323(DoubleVar)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:276(StringVar)
+        1    0.000    0.000    0.000    0.000 __init__.py:159(py_object)
+        1    0.000    0.000    0.000    0.000 {_hashlib.openssl_sha1}
+        1    0.000    0.000    0.000    0.000 Tkinter.py:3219(OptionMenu)
+        1    0.000    0.000    0.000    0.000 graphics.py:643(Circle)
+        1    0.000    0.000    0.000    0.000 graphics.py:601(Rectangle)
+        1    0.000    0.000    0.000    0.000 {_hashlib.openssl_sha512}
+        1    0.000    0.000    0.000    0.000 {_hashlib.openssl_sha256}
+        1    0.000    0.000    0.000    0.000 {_hashlib.openssl_sha224}
+        1    0.000    0.000    0.000    0.000 {method 'extend' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1476(__init__)
+        1    0.000    0.000    0.000    0.000 _endian.py:26(_swapped_meta)
+        1    0.000    0.000    0.000    0.000 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 {max}
+        6    0.000    0.000    0.000    0.000 {method 'pop' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 Tkinter.py:1473(CallWrapper)
+        1    0.000    0.000    0.000    0.000 __init__.py:428(LibraryLoader)
+        1    0.000    0.000    0.000    0.000 {method 'split' of 'str' objects}
+        3    0.000    0.000    0.000    0.000 {method 'clear' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 __init__.py:205(c_longdouble)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:3770(Tributton)
+        1    0.000    0.000    0.000    0.000 graphics.py:622(Oval)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:126(Event)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:3762(Studbutton)
+        1    0.000    0.000    0.000    0.000 {repr}
+        1    0.000    0.000    0.000    0.000 __init__.py:419(OleDLL)
+        1    0.000    0.000    0.000    0.000 mbcs.py:27(IncrementalDecoder)
+        1    0.000    0.000    0.000    0.000 _endian.py:49(BigEndianStructure)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:3208(_setit)
+        1    0.000    0.000    0.000    0.000 mbcs.py:30(StreamWriter)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2536(Label)
+        1    0.000    0.000    0.000    0.000 __init__.py:168(c_short)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2518(Frame)
+        1    0.000    0.000    0.000    0.000 graphics.py:174(GraphicsError)
+        1    0.000    0.000    0.000    0.000 __init__.py:201(c_double)
+        1    0.000    0.000    0.000    0.000 __init__.py:291(c_wchar_p)
+        3    0.000    0.000    0.000    0.000 sre_compile.py:24(_identityfunction)
+        1    0.000    0.000    0.000    0.000 __init__.py:255(c_void_p)
+        1    0.000    0.000    0.000    0.000 __init__.py:180(c_ulong)
+        1    0.000    0.000    0.000    0.000 __init__.py:397(WinDLL)
+        1    0.000    0.000    0.000    0.000 __init__.py:406(HRESULT)
+        2    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2775(Message)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2770(Menubutton)
+        1    0.000    0.000    0.000    0.000 __init__.py:197(c_float)
+        1    0.000    0.000    0.000    0.000 __init__.py:176(c_long)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:3376(BitmapImage)
+        1    0.000    0.000    0.000    0.000 __init__.py:219(c_ulonglong)
+        1    0.000    0.000    0.000    0.000 mbcs.py:33(StreamReader)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:3549(LabelFrame)
+        1    0.000    0.000    0.000    0.000 __init__.py:226(c_ubyte)
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2076(Toplevel)
+        1    0.000    0.000    0.000    0.000 __init__.py:172(c_ushort)
+        1    0.000    0.000    0.000    0.000 __init__.py:215(c_longlong)
+        1    0.000    0.000    0.000    0.000 __init__.py:294(c_wchar)
+        1    0.000    0.000    0.000    0.000 {id}
+        1    0.000    0.000    0.000    0.000 __init__.py:238(c_char)
+        1    0.000    0.000    0.000    0.000 __init__.py:260(c_bool)
+        1    0.000    0.000    0.000    0.000 __init__.py:233(c_byte)
+        1    0.000    0.000    0.000    0.000 {method 'translate' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 Tkinter.py:2069(Widget)
+        2    0.000    0.000    0.000    0.000 {ord}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
