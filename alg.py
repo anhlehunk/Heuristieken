@@ -5,10 +5,8 @@ from random import choice
 import weakref
 import copy
 import math
-import cPickle
 
-# Command used to write all command line output to a file
-# python -m cProfile -s time alg.py > cmdoutput.text 2>&1
+#  python -m cProfile -s time alg.py > profile.text 2>&1
 
 # Classes
 class small_house:
@@ -260,7 +258,8 @@ def distance(house_1, house_2):
 	distances = []
 	for coordinate_1 in house_1:
 		for coordinate_2 in house_2:
-			distances.append(math.sqrt(math.pow(coordinate_1[0] - coordinate_2[0], 2)+math.pow(coordinate_1[1] - coordinate_2[1],2 )))
+			#distances.append(math.sqrt(math.pow(coordinate_1[0] - coordinate_2[0], 2)+math.pow(coordinate_1[1] - coordinate_2[1],2 )))  # Old, slower code. Is better readable
+			distances.append((((coordinate_1[0] - coordinate_2[0]) * (coordinate_1[0] - coordinate_2[0])) + ((coordinate_1[1] - coordinate_2[1]) * (coordinate_1[1] - coordinate_2[1]))) ** .5 )
 	print "Minimal distance ->>>>>>>>>   ",min(distances)
 	return min(distances)
 	
@@ -343,12 +342,13 @@ def new_draw_array(tdlist):
 	win.getMouse()
 	win.close()
 
+
 structuredict = {}
 
 # Generate 10 maps
 for i in range(10):
 	# Debug printing
-	print "TESTDICT", testdict
+	print "STRUCTUREDICT", structuredict
 	print "STUCLIST", STRUCTURELIST
 	
 	# Make list from HEIGHT and WIDTH
@@ -402,7 +402,3 @@ def readfile( file ):
 #add_big_house(9, two_d_list)
 #add_medium_house(15, two_d_list)
 #add_small_house(36, two_d_list)
-
-
-
-
