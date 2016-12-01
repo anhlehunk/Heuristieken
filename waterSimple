@@ -1,0 +1,18 @@
+def create_water(tdlist, grid_list):
+	#makes 4 water structures of equal size in surface
+	surfaces = [.25 * WATERSURFACE for x in range(4)]
+	#changes dimensions of the water structures below
+	count = 0
+	for water in surfaces:
+		dimension = math.sqrt(water)
+		
+		#Makes sure that the proportion is not more than 1:4
+		new_proportion = 2
+		dimensions = [int(dimension * new_proportion), int(dimension / new_proportion)]
+		height_water = dimensions[1]
+		width_water = dimensions[0]
+		#Adds One water structure at a time
+		amount = 1
+		while amount !=0:
+			tdlist, amount = add_structure(tdlist,70 , 34 + 68*count, 1, height_water, width_water, amount)
+			count += 1
