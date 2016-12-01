@@ -3,7 +3,6 @@ from random import randint
 from random import uniform as rand
 from random import choice
 import weakref
-import copy
 import math
 
 #  python -m cProfile -s time alg.py > profile.text 2>&1
@@ -71,29 +70,27 @@ def make_list():
 	newlist = [[0 for i in range(WIDTH)]for j in range(HEIGHT)]
 	return newlist
 	
-def createWater(tdlist):
+def create_water(tdlist):
 	# Makes 4 water structures of equal size in surface
 	surfaces = [.25 * WATERSURFACE for x in range(4)]
+
+	# Counter
+	count = 0
 
 	# Changes dimensions of the water structures below
 	for water in surfaces:
 		dimension = math.sqrt(water)
-		# Makes sure that the proportion is not more than 1:4
-		new_proportion = rand(1,2)
-		dimensions = [int(dimension * new_proportion), int(dimension / new_proportion)]
-		width_water = choice(dimensions)
-		dimensions.remove(width_water)
-		height_water = dimensions[0]
-
-		# Adds One water structure at a time
-		amount = 1
-		while amount !=0:
-			start_x = randint(0,WIDTH-width_water-1)
-			start_y = randint(0,HEIGHT-height_water-1)
-			tdlist, amount = add_structure(tdlist, start_x, start_y, 1, height_water, width_water, 1)
-			amount-=1
-
 		
+		#Makes sure that the proportion is not more than 1:4
+		new_proportion = 2
+		dimensions = [int(dimension * new_proportion), int(dimension / new_proportion)]
+		height_water = dimensions[1]
+		width_water = dimensions[0]
+
+		# Add water and update count for new coordinates
+		tdlist, amount = add_structure(tdlist, 70 , 34 + 68*count, 1, height_water, width_water, 1)
+		count += 1
+
 def add_structure(tdlist, start_x, start_y, value, height, width, amount):
 	# Adds an item to 2d list
 	# Start_x: top left x coordinate (int)
@@ -101,7 +98,6 @@ def add_structure(tdlist, start_x, start_y, value, height, width, amount):
 	# Value: value of item added (int or string)
 	# Height: height of structure to add (int)
 	# Width: width of structure to add (int)
-	# TODO check to see if out of range
 	end_y_range = start_y + height + 1
 	end_x_range = start_x + width + 1
 
@@ -214,6 +210,7 @@ def score(struclist, tdlist):
 				total_value += worth*(1+added_value)
 				break
 	print " Total value: ", total_value
+
 	return total_value
 	
 def check_surrounding(start_y, end_y, start_x, end_x, copy_list):
@@ -258,33 +255,32 @@ def distance(house_1, house_2):
 	distances = []
 	for coordinate_1 in house_1:
 		for coordinate_2 in house_2:
-			#distances.append(math.sqrt(math.pow(coordinate_1[0] - coordinate_2[0], 2)+math.pow(coordinate_1[1] - coordinate_2[1],2 )))  # Old, slower code. Is better readable
+			# distances.append(math.sqrt(math.pow(coordinate_1[0] - coordinate_2[0], 2)+math.pow(coordinate_1[1] - coordinate_2[1],2 )))  # Old, slower code. Is better readable
 			distances.append((((coordinate_1[0] - coordinate_2[0]) * (coordinate_1[0] - coordinate_2[0])) + ((coordinate_1[1] - coordinate_2[1]) * (coordinate_1[1] - coordinate_2[1]))) ** .5 )
 	print "Minimal distance ->>>>>>>>>   ",min(distances)
 	return min(distances)
-	
-def add_water(amount, tdlist):
-	while amount !=0:
-		tdlist, amount = add_structure(tdlist, randint(0,290), randint(0,270), WATER, randint(10,30), randint(10,30), amount)
-		amount -=1
 
+# Add structure function filled in with small house values
 def add_small_house(amount, tdlist):
 	while amount !=0:
 		tdlist, amount = add_structure(tdlist, randint(small_house.min_free,WIDTH-small_house.min_free-small_house.width), randint(small_house.min_free,HEIGHT-small_house.min_free-small_house.height), HOUSE_SMALL, small_house.height, small_house.width, amount)
-		amount -=1
+		amount -= 1
 
+# Add structure function filled with medium house values
 def add_medium_house(amount, tdlist):
 	while amount !=0:
 		tdlist, amount = add_structure(tdlist, randint(medium_house.min_free,WIDTH-medium_house.min_free-medium_house.width), randint(medium_house.min_free,HEIGHT-medium_house.min_free-medium_house.height), HOUSE_MEDIUM, medium_house.height, medium_house.width, amount)
 		amount -=1
 
+# Add structure function filled in with big house values
 def add_big_house(amount, tdlist):
 	while amount !=0:
 		tdlist, amount = add_structure(tdlist, randint(big_house.min_free,WIDTH-big_house.min_free-big_house.width), randint(big_house.min_free,HEIGHT-big_house.min_free-big_house.height), HOUSE_LARGE, big_house.height, big_house.width, amount)
 		amount -=1
-			
+		
+# Old function, only use when new function doesnt work.
+# Is many times slower than the new one	
 def old_draw_array(tdlist):
-	# Uses graphics lib to draw the 2d list
 	win = GraphWin("Map",WIDTH,HEIGHT)
 	for y in enumerate(tdlist):
 		for x in enumerate(y[1]):
@@ -306,6 +302,22 @@ def old_draw_array(tdlist):
 	win.getMouse()
 	win.close()
 
+# Used to write structuredict to file for analysis
+def writetofile( file, input):
+	# Write dict to file, used for calculations
+	with open( file, 'w' ) as f:
+		f.write("{}\n".format(input))
+
+# Used to read structuredict from file
+def readfile( file ):
+	result  = []
+	with open( file ) as f:
+		for line in f:	
+			result.append( line )
+
+	return result
+
+# Function to draw map from structurelist
 def new_draw_array(tdlist):
 	win = GraphWin("Map",WIDTH, HEIGHT)
 
@@ -342,63 +354,51 @@ def new_draw_array(tdlist):
 	win.getMouse()
 	win.close()
 
+# Run the random algorithm with variant 1,2 or 3 and with n iterations
+def algorithm(variant, n):
+	structuredict = {}
+	for i in range(n):
+		# New structurelist
+		STRUCTURELIST = []
 
-structuredict = {}
-
-# Generate 10 maps
-for i in range(10):
-	# Debug printing
-	print "STRUCTUREDICT", structuredict
-	print "STUCLIST", STRUCTURELIST
+		# Debug printing
+		print "STRUCTUREDICT", structuredict
+		
+		# Make list from HEIGHT and WIDTH
+		two_d_list = make_list()
 	
-	# Make list from HEIGHT and WIDTH
-	two_d_list = make_list()
+		# Different amount of structures for different variants
+		if variant == 1:
+			create_water(two_d_list)
+			add_big_house(3, two_d_list)
+			add_medium_house(5, two_d_list)
+			add_small_house(12, two_d_list)	
+		elif variant == 2:
+			create_water(two_d_list)
+			add_big_house(6, two_d_list)
+			add_medium_house(10, two_d_list)
+			add_small_house(24, two_d_list)
+		elif variant == 3:
+			create_water(two_d_list)
+			add_big_house(9, two_d_list)
+			add_medium_house(15, two_d_list)
+			add_small_house(36, two_d_list)
+		else:
+			print "Variant must be 1,2 or 3"
 
-	# Variant 1
-	createWater(two_d_list)
-	add_big_house(3, two_d_list)
-	add_medium_house(5, two_d_list)
-	add_small_house(12, two_d_list)
 
-	# Prints Total value
-	value = score(STRUCTURELIST, two_d_list)
+		print STRUCTURELIST
+		# Prints Total value
+		value = score(STRUCTURELIST, two_d_list)
 
-	# Add new entry to structuredict
-	structuredict.update({ value : STRUCTURELIST })
+		# Add new entry to structuredict
+		structuredict.update({ value : STRUCTURELIST })
+	
+		# Only draw map with 1 iteration
+		if n == 1:
+			new_draw_array(two_d_list)
 
-	# Reset structurelist
-	STRUCTURELIST = []
+		# Write structuredict to file
+		writetofile("dict.txt", structuredict)
 
-# Used to write structuredict to file for analysis
-def writetofile( file, input):
-	# Write dict to file, used for calculations
-	with open( file, 'w' ) as f:
-		f.write("{}\n".format(input))
-
-# Used to read structuredict from file
-def readfile( file ):
-	result  = []
-	with open( file ) as f:
-		for line in f:	
-			result.append( line )
-
-	return result
-
-# Write/read
-#writetofile("dict.txt", testdict)
-#readfile("dict.txt")
-
-# Draws the list
-#new_draw_array(two_d_list)
-
-# Variant 2
-#createWater(two_d_list)
-#add_big_house(6, two_d_list)
-#add_medium_house(10, two_d_list)
-#add_small_house(24, two_d_list)
-
-# Variant 3
-#createWater(two_d_list)
-#add_big_house(9, two_d_list)
-#add_medium_house(15, two_d_list)
-#add_small_house(36, two_d_list)
+algorithm(1,1)
