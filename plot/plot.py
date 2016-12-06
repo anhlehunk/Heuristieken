@@ -2,14 +2,19 @@ import matplotlib.pyplot as plt
 from collections import Counter, OrderedDict
 
 # Reads list from file
+# File must have int or float, one value per line
 def readfile(file):
 	temp = open(file).readlines()
-	output = [int(i.strip()) for i in temp]
+	output = [int(float(i.strip())) for i in temp]
 	rounded = [round(i,-5) for i in output] # Rounded to 5 zeros before comma
 	return rounded
 
+
+FILE = "filename.txt"
+
+
 # Y is list from file
-y = readfile("values.txt")
+y = readfile(FILE)
 
 # Count each value
 count= Counter(y)
