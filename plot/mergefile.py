@@ -5,11 +5,12 @@ def writefile(file, input):
 	outfile.close()
 
 # Reads list from file
+# File must have int or float, one value per line
 def readfile(file):
 	temp = open(file).readlines()
-	#output = [int(i.strip()) for i in temp]
-	output = [i for i in temp]
-	return output
+	output = [int(float(i.strip())) for i in temp]
+	rounded = [round(i,-5) for i in output] # Rounded to 5 zeros before comma
+	return rounded
 
 # Merge file1 and file2 to outputfile
 def merge(file1, file2, outputfile):
