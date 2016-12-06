@@ -491,10 +491,11 @@ def create(variant):
 	grid_list = add_medium_house(amount_medium_houses, two_d_list, grid_list)
 	grid_list = add_small_house(amount_small_houses, two_d_list, grid_list)
 	if grid_list == "End":
-		return "Done"
+		return [], []
 	else:
 		#new_draw_array(two_d_list)
-		return score(STRUCTURELIST, two_d_list)
+		return STRUCTURELIST, two_d_list
+
 		
 def writefile(file, input):
 	outfile = open(file, "w")
@@ -503,19 +504,19 @@ def writefile(file, input):
 
 
 #Variants 1 through 3 can be entered here. Run for result.	
-VARIANT = 1
+VARIANT = 3
 scores = []
 
 for x in range(10):
-	scores.append(create(VARIANT))
+	STRUCTURELIST, two_d_list = create(VARIANT)
+	if STRUCTURELIST != []:
+		scores.append(score(STRUCTURELIST, two_d_list))
+		print x
 	
 
 
 
-writefile("results.txt", scores)
-
-
-
+writefile("result.txt", scores)
 
 
 
