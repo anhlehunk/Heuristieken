@@ -5,6 +5,7 @@ from random import choice
 import weakref
 import copy
 import math
+import datetime
 
 
 # Classes
@@ -347,7 +348,7 @@ def add_small_house(amount, tdlist, grid_list):
 			return "End"
 			
 
-		print len(STRUCTURELIST), amount, len(grid_list)
+		#print len(STRUCTURELIST), amount, len(grid_list)
 	return grid_list
 		
 
@@ -373,7 +374,7 @@ def add_medium_house(amount, tdlist, grid_list):
 		if counter < 5:	
 			del grid_list[block]
 
-		print len(STRUCTURELIST), amount, len(grid_list)
+		#print len(STRUCTURELIST), amount, len(grid_list)
 	return grid_list
 	
 def add_big_house(amount, tdlist, grid_list):
@@ -383,14 +384,12 @@ def add_big_house(amount, tdlist, grid_list):
 			block -= len(grid_list)+randint(0,2)
 		saved_amount = amount
 		block += randint(0,3)
-		print block, "block", len(grid_list), "grid"
+		#print block, "block", len(grid_list), "grid"
 		x_range_start = grid_list[block][0][1]
 		x_range_end = grid_list[block][1][1]-1
 		y_range_start = grid_list[block][0][0]
 		y_range_end = grid_list[block][1][0]-1
 		counter = 0
-
-			
 		while amount == saved_amount:
 			if x_range_start < 40  or x_range_start > 280 or y_range_start < 40 or y_range_start > 280:
 				counter = 2
@@ -401,7 +400,7 @@ def add_big_house(amount, tdlist, grid_list):
 			counter +=1
 			
 		if counter < 2:	
-			print len(STRUCTURELIST), amount, len(grid_list)
+			#print len(STRUCTURELIST), amount, len(grid_list)
 			del grid_list[block]
 
 	return grid_list
@@ -418,8 +417,8 @@ def old_draw_array(tdlist):
 				pt = Point(x[0], y[0])
 				pt.setFill('blue')
 			# and so on
-			else:
-				print "Add color for value"
+			#else:
+				#print "Add color for value"
 			pt.draw(win)
 	win.getMouse()
 	win.close()
@@ -452,8 +451,8 @@ def new_draw_array(tdlist):
 		elif value == 4:
 			structure.setFill('purple')
 			structure.setOutline('purple')
-		else:
-			print "Structure value not defined"
+		#else:
+			#print "Structure value not defined"
 		structure.draw(win)
 
 	# Make window
@@ -494,19 +493,26 @@ def create(variant):
 	if grid_list == "End":
 		return "Done"
 	else:
-		new_draw_array(two_d_list)
-		score(STRUCTURELIST, two_d_list)
+		#new_draw_array(two_d_list)
+		return score(STRUCTURELIST, two_d_list)
+		
+def writefile(file, input):
+	outfile = open(file, "w")
+	print >> outfile, "\n".join(str(i) for i in input)
+	outfile.close()
 
 
 #Variants 1 through 3 can be entered here. Run for result.	
-VARIANT = 3
+VARIANT = 1
+scores = []
 
-create(VARIANT)
+for x in range(10):
+	scores.append(create(VARIANT))
+	
 
 
 
-
-
+writefile("results.txt", scores)
 
 
 
