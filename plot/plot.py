@@ -9,7 +9,7 @@ def readfile(file):
 	output = [int(float(i.strip())) for i in temp]
 	return output
 
-
+# Define file
 FILE = "newvalues.txt"
 
 # Y is list from file
@@ -28,6 +28,7 @@ print ("Approx. 99% of values between: ", int(round(avg - 2*std, -2)), " and ", 
 
 # Round values here
 y = [round(i,-5) for i in x]
+
 # Count each value
 count= Counter(y)
 
