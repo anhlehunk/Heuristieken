@@ -7,26 +7,27 @@ import numpy as np
 def readfile(file):
 	temp = open(file).readlines()
 	output = [int(float(i.strip())) for i in temp]
-	rounded = [round(i,-5) for i in output] # Rounded to 5 zeros before comma
-	return rounded
+	return output
 
-# Define file
+
 FILE = "newvalues.txt"
 
 # Y is list from file
-y = readfile(FILE)
+x = readfile(FILE)
 
 # Average and standard deviation
-avg = sum(y)/len(y)
-std = np.std(y)
+avg = sum(x)/len(x)
+std = np.std(x)
 
 # Print some data
 print ("Average value: ", avg)
 print ("Standard deviation: ", std)
-print ("Approx. 68% of values between: ", round(avg - 1*std, -2), " and ", round(avg + 1*std, -2))
-print ("Approx. 95% of values between: ", round(avg - 2*std, -2), " and ", round(avg + 2*std, -2))
-print ("Approx. 99% of values between: ", round(avg - 2*std, -2), " and ", round(avg + 3*std, -2))
+print ("Approx. 68% of values between: ", int(round(avg - 1*std, -2)), " and ", int(round(avg + 1*std, -2)))
+print ("Approx. 95% of values between: ", int(round(avg - 2*std, -2)), " and ", int(round(avg + 2*std, -2)))
+print ("Approx. 99% of values between: ", int(round(avg - 2*std, -2)), " and ", int(round(avg + 3*std, -2)))
 
+# Round values here
+y = [round(i,-5) for i in x]
 # Count each value
 count= Counter(y)
 
